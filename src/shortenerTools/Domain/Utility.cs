@@ -76,6 +76,11 @@ namespace Cloud5mins.domain
                 return new UnauthorizedResult();
             }
 
+            log.LogWarning("--> Identity: " + principal.Identity);
+            log.LogWarning("--> IsAuthenticated: " + principal.Identity.IsAuthenticated.ToString());
+            log.LogWarning("--> Name: " + principal.Identity.Name);
+            log.LogWarning("--> AuthenticationType: " + principal.Identity.AuthenticationType);
+
             if (!principal.Identity.IsAuthenticated)
             {
                 log.LogWarning("Request was not authenticated.");
