@@ -1,0 +1,19 @@
+name: DEV CI-CD 
+
+on:
+  push:
+    branches: temp
+
+jobs:
+  build-and-deploy:
+    runs-on: ubuntu-latest
+    steps:
+    - uses: actions/checkout@v1
+
+    - uses: azure/login@v1
+      with:
+        creds: ${{ secrets.GR_azUrlGitHubDev_CREDENTIALS }}
+      
+
+    - run: |
+        az group deployment create -n github-temp -g Alpha-Shortener --template-file deployment/azureDeploy.json --parameters "deployment/azureDeploy.params.temp.json"
